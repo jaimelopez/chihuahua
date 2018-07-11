@@ -20,6 +20,12 @@ const appHeader = `
 \____/|_| |_|_|_| |_|\____|\____|_| |_|\____|\____|
  `
 
+const (
+	successExitCode          int = 0
+	badUsageExitCode         int = 0
+	performanceErrorExitCode int = 1
+)
+
 func main() {
 	params := parameters.NewFromFlags()
 
@@ -58,19 +64,19 @@ func main() {
 	}
 
 	if succeed {
-		exit("Good perfomance dude!", 0)
+		exit("Good perfomance dude!", successExitCode)
 	} else if *params.Force {
-		exit("Bad performance but forcing...", 0)
+		exit("Bad performance but forcing...", successExitCode)
 	}
 
-	exit("Bad performance!", -1)
+	exit("Bad performance!", performanceErrorExitCode)
 }
 
 func usage() {
 	logger.Info(appHeader)
 	flag.PrintDefaults()
 
-	exit("", 0)
+	exit("", badUsageExitCode)
 }
 
 func exit(msg string, status int) {

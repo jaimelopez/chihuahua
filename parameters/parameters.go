@@ -27,7 +27,7 @@ func NewFromFlags() *Parameters {
 		Duration:    flag.Duration("duration", 1*time.Second, "Time to execute benchmarks"),
 		Threshold:   flag.Uint64("threshold", 15, "Threshold percent to determine performance is good enough"),
 		Save:        flag.Bool("save", false, "Results will be saved if results are higher than previous"),
-		Force:       flag.Bool("force", false, "Force to save results even if they are worse"),
+		Force:       flag.Bool("force", false, "Forces to save results even if they are worse"),
 		Results:     flag.Bool("results", false, "Shows results as table"),
 		Debug:       flag.Bool("debug", false, "Shows traces for debugging"),
 	}
