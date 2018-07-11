@@ -10,25 +10,38 @@ import (
 	"golang.org/x/tools/benchmark/parse"
 )
 
-// Execute todo
-func Execute(duration time.Duration) (*Result, error) {
+// Run todo
+func Run(duration time.Duration, debug bool) (*Result, error) {
 	var output bytes.Buffer
 
 	cmd := exec.Command("go", "test", "-bench", ".", "-run", "NONE", "-benchtime", duration.String(), "-benchmem")
 	cmd.Stdout = io.Writer(&output)
 	cmd.Stderr = io.Writer(os.Stderr)
 
+	if debug {
+		cmd.Stdout = io.MultiWriter(os.Stdout, &output)
+	}
+
 	err := cmd.Run()
 	if err != nil {
 		return nil, err
 	}
 
-	results, err := parse.ParseSet(&output)
+	return Parse(output)
+}
+
+// Parse todo
+func Parse(output bytes.Buffer) (*Result, error) {
+	set, err := parse.ParseSet(&output)
 	if err != nil {
 		return nil, err
 	}
-	return &Result{
-		ID:    "",
-		Tests: results,
-	}, nil
+
+	result := &Result{}
+
+	for name, values := range set {
+		(*result)[name] = NewTestResult(values[0])
+	}
+
+	return result, nil
 }
