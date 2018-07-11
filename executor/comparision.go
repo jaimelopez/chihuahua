@@ -3,12 +3,12 @@ package executor
 // Comparision represents a whole comparision between two results
 type Comparision struct {
 	Test    string
-	Metrics *[]MetricComparision
+	Metrics []MetricComparision
 }
 
 // IsValid determines if is valid even being worse but stills over threshold
 func (cmp *Comparision) IsValid() bool {
-	for _, res := range *cmp.Metrics {
+	for _, res := range cmp.Metrics {
 		if !res.Valid {
 			return false
 		}
@@ -19,7 +19,7 @@ func (cmp *Comparision) IsValid() bool {
 
 // IsWorse indicates if comparasion is fully or partially worse than previous one
 func (cmp *Comparision) IsWorse() bool {
-	for _, res := range *cmp.Metrics {
+	for _, res := range cmp.Metrics {
 		if res.IsWorse() {
 			return true
 		}

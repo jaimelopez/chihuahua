@@ -14,15 +14,15 @@ const (
 )
 
 // Print comparision against standard output
-func Print(comp *[]executor.Comparision) {
+func Print(comp []executor.Comparision) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"Test", "Metric", "Current", "Latest", "Diff", "Worse", "Valid"})
 	table.SetCenterSeparator("")
 	table.SetColumnSeparator("")
 	table.SetRowSeparator("")
 
-	for _, comp := range *comp {
-		for _, metric := range *comp.Metrics {
+	for _, comp := range comp {
+		for _, metric := range comp.Metrics {
 			worse := checkSymbol
 			if metric.IsWorse() {
 				worse = crossSymbol

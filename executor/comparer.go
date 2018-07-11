@@ -5,7 +5,7 @@ import (
 )
 
 // Compare two different benchmark results
-func Compare(latest *Result, current *Result, threshold uint) (bool, *[]Comparision) {
+func Compare(latest *Result, current *Result, threshold uint) (bool, []Comparision) {
 	succeed := true
 	list := []Comparision{}
 
@@ -18,7 +18,7 @@ func Compare(latest *Result, current *Result, threshold uint) (bool, *[]Comparis
 
 		cmp := Comparision{
 			Test: name,
-			Metrics: &[]MetricComparision{
+			Metrics: []MetricComparision{
 				calculate("NsPerOp", currentBench.NsPerOp, latestBench.NsPerOp, threshold),
 				calculate("AllocedBytesPerOp", float64(currentBench.AllocedBytesPerOp), float64(latestBench.AllocedBytesPerOp), threshold),
 				calculate("AllocsPerOp", float64(currentBench.AllocsPerOp), float64(latestBench.AllocsPerOp), threshold),
@@ -32,7 +32,7 @@ func Compare(latest *Result, current *Result, threshold uint) (bool, *[]Comparis
 		}
 	}
 
-	return succeed, &list
+	return succeed, list
 }
 
 func calculate(metric string, current float64, latest float64, threshold uint) MetricComparision {
