@@ -3,6 +3,9 @@ Chihuahua is a command line tool which executes golang microbenchmarks and compa
 
 Results of previous executions can be stored with different drivers, for now `elasticsearch` or directly to `filesystem`.
 
+# Installation
+```go get -u -f github.com/jaimelopez/chihuahua```
+
 # Usage
 - `debug`       shows traces for debugging
 - `destination` storage destination
