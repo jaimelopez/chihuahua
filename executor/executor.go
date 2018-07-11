@@ -10,7 +10,7 @@ import (
 	"golang.org/x/tools/benchmark/parse"
 )
 
-// Run todo
+// Run benchmarks
 func Run(duration time.Duration, debug bool) (*Result, error) {
 	var output bytes.Buffer
 
@@ -30,7 +30,7 @@ func Run(duration time.Duration, debug bool) (*Result, error) {
 	return Parse(output)
 }
 
-// Parse todo
+// Parse parse benchmarks results
 func Parse(output bytes.Buffer) (*Result, error) {
 	set, err := parse.ParseSet(&output)
 	if err != nil {

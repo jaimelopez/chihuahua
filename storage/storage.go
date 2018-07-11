@@ -18,13 +18,13 @@ const (
 // ErrInvalidStorageDriver when a unknown driver is specified
 var ErrInvalidStorageDriver = errors.New("storage driver missing or unknown")
 
-// Storage todo
+// Storage represents a storage driver
 type Storage interface {
 	GetLatest() (*executor.Result, error)
 	Persist(r *executor.Result) error
 }
 
-// New todo
+// New returns new driver instance dependening on selected driver
 func New(name string, driver string, destination string) (Storage, error) {
 	switch Driver(driver) {
 	case FileSystemDriver:

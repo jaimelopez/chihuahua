@@ -1,12 +1,12 @@
 package executor
 
-// Comparision todo
+// Comparision represents a whole comparision between two results
 type Comparision struct {
 	Test    string
 	Metrics *[]MetricComparision
 }
 
-// IsValid todo
+// IsValid determines if is valid even being worse but stills over threshold
 func (cmp *Comparision) IsValid() bool {
 	for _, res := range *cmp.Metrics {
 		if !res.Valid {
@@ -17,7 +17,7 @@ func (cmp *Comparision) IsValid() bool {
 	return true
 }
 
-// IsWorse todo
+// IsWorse indicates if comparasion is fully or partially worse than previous one
 func (cmp *Comparision) IsWorse() bool {
 	for _, res := range *cmp.Metrics {
 		if res.IsWorse() {
@@ -28,7 +28,7 @@ func (cmp *Comparision) IsWorse() bool {
 	return false
 }
 
-// MetricComparision todo
+// MetricComparision represents a metric comparision against latest results
 type MetricComparision struct {
 	Metric       string
 	CurrentValue float64
@@ -37,7 +37,7 @@ type MetricComparision struct {
 	Valid        bool
 }
 
-// IsWorse todo
+// IsWorse defines whether metric is worse than previous one or not
 func (mc *MetricComparision) IsWorse() bool {
 	return mc.Diff < 0
 }

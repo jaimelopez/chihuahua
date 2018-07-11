@@ -4,7 +4,7 @@ import (
 	"math"
 )
 
-// Compare todo
+// Compare two different benchmark results
 func Compare(latest *Result, current *Result, threshold uint) (bool, *[]Comparision) {
 	succeed := true
 	list := []Comparision{}

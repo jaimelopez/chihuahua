@@ -13,7 +13,7 @@ const (
 	crossSymbol string = "❌"
 )
 
-// Print todo
+// Print comparision against standard output
 func Print(comp *[]executor.Comparision) {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"Test", "Metric", "Current", "Latest", "Diff", "Worse", "Valid"})

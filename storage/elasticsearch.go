@@ -17,21 +17,21 @@ const (
 	timestampField             string = "@timestamp"
 )
 
-// ElasticSearch todo
+// ElasticSearch struct representation
 type ElasticSearch struct {
-	URL    string
-	Prefix string
+	url    string
+	prefix string
 }
 
-// NewElasticSearchStorage todo
+// NewElasticSearchStorage driver
 func NewElasticSearchStorage(url string, prefix string) *ElasticSearch {
 	return &ElasticSearch{
-		URL:    url,
-		Prefix: prefix,
+		url:    url,
+		prefix: prefix,
 	}
 }
 
-// GetLatest todo
+// GetLatest stored results
 func (es *ElasticSearch) GetLatest() (*executor.Result, error) {
 	nsPerOperation, err := es.getLatestFromIndex(nsPerOpertationIndexName)
 	if err != nil {
@@ -77,7 +77,7 @@ func (es *ElasticSearch) GetLatest() (*executor.Result, error) {
 	return &result, nil
 }
 
-// Persist todo
+// Persist results
 func (es *ElasticSearch) Persist(r *executor.Result) error {
 	nsPerOperation := map[string]interface{}{}
 	allocationsNumber := map[string]interface{}{}
@@ -107,6 +107,18 @@ func (es *ElasticSearch) Persist(r *executor.Result) error {
 	return nil
 }
 
+func (es *ElasticSearch) client() (*elastic.Client, error) {
+	return elastic.NewClient(
+		elastic.SetURL(es.url),
+		elastic.SetSniff(false),
+		elastic.SetHealthcheck(false),
+	)
+}
+
+func (es *ElasticSearch) indexName(idx string) string {
+	return fmt.Sprintf("%s-%s", es.prefix, idx)
+}
+
 func (es *ElasticSearch) index(idx string, doc map[string]interface{}) error {
 	client, err := es.client()
 	if err != nil {
@@ -123,18 +135,6 @@ func (es *ElasticSearch) index(idx string, doc map[string]interface{}) error {
 		Do(context.Background())
 
 	return err
-}
-
-func (es *ElasticSearch) client() (*elastic.Client, error) {
-	return elastic.NewClient(
-		elastic.SetURL(es.URL),
-		elastic.SetSniff(false),
-		elastic.SetHealthcheck(false),
-	)
-}
-
-func (es *ElasticSearch) indexName(idx string) string {
-	return fmt.Sprintf("%s-%s", es.Prefix, idx)
 }
 
 func (es *ElasticSearch) getLatestFromIndex(idx string) (map[string]interface{}, error) {

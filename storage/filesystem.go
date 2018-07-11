@@ -8,19 +8,19 @@ import (
 	"github.com/jaimelopez/chihuahua/executor"
 )
 
-// FileSystem todo
+// FileSystem struct representation
 type FileSystem struct {
 	file string
 }
 
-// NewFileSytemStorage todo
+// NewFileSytemStorage driver
 func NewFileSytemStorage(destination string) *FileSystem {
 	return &FileSystem{
 		file: destination,
 	}
 }
 
-// GetLatest todo
+// GetLatest stored results
 func (fs *FileSystem) GetLatest() (*executor.Result, error) {
 	result := &executor.Result{}
 
@@ -38,7 +38,7 @@ func (fs *FileSystem) GetLatest() (*executor.Result, error) {
 	return result, err
 }
 
-// Persist todo
+// Persist results
 func (fs *FileSystem) Persist(r *executor.Result) error {
 	f, err := os.OpenFile(fs.file, os.O_CREATE|os.O_WRONLY, 0666)
 
