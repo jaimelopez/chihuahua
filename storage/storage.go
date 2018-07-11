@@ -25,12 +25,12 @@ type Storage interface {
 }
 
 // New returns new driver instance dependening on selected driver
-func New(name string, driver string, destination string) (Storage, error) {
+func New(group string, driver string, destination string) (Storage, error) {
 	switch Driver(driver) {
 	case FileSystemDriver:
-		return NewFileSytemStorage(destination), nil
+		return NewFileSytemStorage(destination, group)
 	case ElasticSearchDriver:
-		return NewElasticSearchStorage(destination, name), nil
+		return NewElasticSearchStorage(destination, group), nil
 	default:
 		return nil, ErrInvalidStorageDriver
 	}
