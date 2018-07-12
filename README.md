@@ -1,4 +1,4 @@
-![](https://www.tenstickers.com/wall-stickers/img/preview/i-love-chihuahua-decal-7486.png)
+![](https://image.ibb.co/i2vvmo/chihuahua.png)
 
 Chihuahua is a command line tool which executes golang microbenchmarks and compares them with previous results to determine whether performance is good enough to deploy new changes in your application.
 
