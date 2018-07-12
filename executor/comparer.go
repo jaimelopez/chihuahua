@@ -38,7 +38,7 @@ func Compare(latest *Result, current *Result, threshold uint) (bool, []Comparisi
 func calculate(metric string, current float64, latest float64, threshold uint) MetricComparision {
 	diff := (float64(latest)/float64(current))*100 - 100
 
-	if latest == 0 || diff == -0 {
+	if latest == 0 {
 		diff = 0
 	}
 
