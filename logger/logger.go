@@ -1,18 +1,18 @@
 package logger
 
 import (
-	"fmt"
+	"log"
 	"os"
 )
 
+var l = log.New(os.Stderr, "", 0)
+
 // Info prints an info message directly to standard output
 func Info(v ...interface{}) {
-	fmt.Println(v...)
+	l.Println(v...)
 }
 
 // Error generates an error trace into standard output and ends the application
-func Error(where string, err error) {
-	fmt.Println("[ERROR]", where, ":", err)
-
-	os.Exit(-1)
+func Error(v ...interface{}) {
+	l.Fatalln(append([]interface{}{"ERROR:"}, v...)...)
 }
