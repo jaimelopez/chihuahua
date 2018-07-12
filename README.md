@@ -40,7 +40,7 @@ The structure of each document is:
     "name-of-benchmark-1": "value",
     "name-of-benchmark-2": "value",
     "name-of-benchmark-3": "value",
-    "@timestamp": "timestamp"
+    "@timestamp": "2018-07-12 07:07:22.439511876 +0000 UTC"
 }
 ```
 

@@ -126,7 +126,7 @@ func (es *ElasticSearch) index(idx string, doc map[string]interface{}) error {
 	}
 
 	idx = es.indexName(idx)
-	doc[timestampField] = time.Now()
+	doc[timestampField] = time.Now().UTC()
 
 	_, err = client.Index().
 		Index(idx).
