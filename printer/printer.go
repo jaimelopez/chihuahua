@@ -11,6 +11,7 @@ const (
 	crossSymbol  string = "❌"
 	betterSymbol string = "▲"
 	worseSymbol  string = "▼"
+	equalSymbol  string = "⬌"
 )
 
 // Print comparision against standard output
@@ -25,7 +26,9 @@ func Print(comparisions []executor.Comparision) {
 
 		for _, metric := range comp.Metrics {
 			worse := betterSymbol
-			if metric.IsWorse() {
+			if metric.CurrentValue == metric.LatestValue {
+				worse = equalSymbol
+			} else if metric.IsWorse() {
 				worse = worseSymbol
 			}
 
