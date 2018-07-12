@@ -3,6 +3,7 @@ package executor
 import (
 	"bytes"
 	"io"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"time"
@@ -27,12 +28,22 @@ func Run(duration time.Duration, debug bool) (*Result, error) {
 		return nil, err
 	}
 
-	return Parse(output)
+	return Parse(&output)
+}
+
+// FromFile takes benchmarks results directly printed to from file
+func FromFile(file string) (*Result, error) {
+	c, err := ioutil.ReadFile(file)
+	if err != nil {
+		return nil, err
+	}
+
+	return Parse(bytes.NewBuffer(c))
 }
 
 // Parse parse benchmarks results
-func Parse(output bytes.Buffer) (*Result, error) {
-	set, err := parse.ParseSet(&output)
+func Parse(output *bytes.Buffer) (*Result, error) {
+	set, err := parse.ParseSet(output)
 	if err != nil {
 		return nil, err
 	}

@@ -43,7 +43,14 @@ func main() {
 		logger.Error("retrieving latest benchmarks results", err)
 	}
 
-	currentResult, err := executor.Run(*params.Duration, *params.Debug)
+	var currentResult *executor.Result
+
+	if *params.FromFile == "" {
+		currentResult, err = executor.Run(*params.Duration, *params.Debug)
+	} else {
+		currentResult, err = executor.FromFile(*params.FromFile)
+	}
+
 	if err != nil {
 		logger.Error("executing benchmarks", err)
 	} else if len(*currentResult) == 0 {

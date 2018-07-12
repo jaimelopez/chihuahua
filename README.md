@@ -7,15 +7,26 @@ Results of previous executions can be stored with different drivers, for now `el
 ```go get -u -f github.com/jaimelopez/chihuahua```
 
 # Usage
-- `debug`       shows traces for debugging
-- `destination` storage destination
-- `duration`    time to execute benchmarks (default 1s)
-- `force`       forces to save results even if they are worse
 - `group`       group name of metrics to store
-- `results`     prints results as table directly thru standard output
-- `save`        results will be saved if are higher than previous ones
 - `storage`     driver to store results (elastic/file)
+- `destination` storage destination
+- `fromfile`    take results to analyze from file instead running benchmarks
+- `duration`    time to execute benchmarks (default 1s)
 - `threshold`   threshold percent to determine whether performance is good enough (default 15)
+- `save`        results will be saved if are higher than previous ones
+- `force`       forces to save results even if they are worse
+- `results`     prints results as table directly thru standard output
+- `debug`       shows traces for debugging
+
+## From file
+There is a way in which you can specify the output (printed directly to a file) of executed benchmarks so you can take that data instead of executing them via `Chihuahua`.
+
+Example:
+```
+cd application/benchmarks
+go test -bench . -run NONE -benchmem > /var/tmp/current-results
+chihuahua -group myapp -storage file -destination /var/tmp/benchs -fromfile /var/tmp/current-results -results -save 
+```
 
 ## Filesystem storage
 Destination should be a folder where results will be stored.  
