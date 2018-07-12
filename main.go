@@ -54,7 +54,7 @@ func main() {
 	if err != nil {
 		logger.Error("executing benchmarks", err)
 	} else if len(*currentResult) == 0 {
-		logger.Error("executing benchmarks", errors.New("no test found"))
+		logger.Error("executing benchmarks", errors.New("no tests found"))
 	}
 
 	succeed, comparision := executor.Compare(latestResult, currentResult, uint(*params.Threshold))
