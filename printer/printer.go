@@ -16,7 +16,7 @@ const (
 // Print comparision against standard output
 func Print(comp []executor.Comparision) {
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Test", "Metric", "Current", "Latest", "Diff", "Worse", "Valid"})
+	table.SetHeader([]string{"Valid", "Worse", "Test", "Metric", "Current", "Latest", "Diff"})
 	table.SetCenterSeparator("")
 	table.SetColumnSeparator("")
 	table.SetRowSeparator("")
@@ -34,13 +34,13 @@ func Print(comp []executor.Comparision) {
 			}
 
 			table.Append([]string{
+				valid,
+				worse,
 				comp.Test,
 				metric.Metric,
 				strconv.FormatFloat(metric.CurrentValue, 'f', 0, 64),
 				strconv.FormatFloat(metric.LatestValue, 'f', 0, 64),
 				strconv.FormatFloat(metric.Diff, 'f', 0, 64),
-				worse,
-				valid,
 			})
 		}
 	}
