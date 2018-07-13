@@ -11,7 +11,7 @@ const (
 	crossSymbol  string = "❌"
 	betterSymbol string = "▲"
 	worseSymbol  string = "▼"
-	equalSymbol  string = "⬌"
+	equalSymbol  string = "➔"
 )
 
 // Print comparision against standard output
