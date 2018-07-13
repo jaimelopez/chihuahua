@@ -32,9 +32,12 @@ func Print(comparisions []executor.Comparision) {
 				worse = worseSymbol
 			}
 
-			diff := fmt.Sprintf("(%d/%d) %d%%", int(metric.CurrentValue), int(metric.LatestValue), int(metric.Diff))
-
-			fmt.Println(" ", worse, metric.Metric, diff)
+			fmt.Printf("%2s %4d%% %s (%d/%d)\n",
+				worse,
+				int(metric.Diff),
+				metric.Metric,
+				int(metric.CurrentValue),
+				int(metric.LatestValue))
 		}
 
 		fmt.Println()
