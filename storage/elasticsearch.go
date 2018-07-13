@@ -148,9 +148,9 @@ func (es *ElasticSearch) getLatestFromIndex(idx string) (map[string]interface{},
 		Sort("@timestamp", false).
 		Do(context.Background())
 
-	if err != nil {
+	if err != nil && !elastic.IsNotFound(err) {
 		return nil, err
-	} else if sr.TotalHits() == 0 {
+	} else if elastic.IsNotFound(err) || sr.TotalHits() == 0 {
 		return map[string]interface{}{}, nil
 	}
 
