@@ -7,7 +7,9 @@ const (
 	MetricAllocedBytesPerOpDisplay string = "memory"
 	// MetricAllocsPerOpDisplay specifies name to display for AllocsPerOp metric
 	MetricAllocsPerOpDisplay string = "allocations"
+)
 
+const (
 	// MetricNsPerOpMeasure specifies used measure in NsPerOp metric
 	MetricNsPerOpMeasure string = "ns"
 	// MetricAllocedBytesPerOpMeasure specifies used measure in AllocedBytesPerOp metric
