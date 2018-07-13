@@ -32,12 +32,13 @@ func Print(comparisions []executor.Comparision) {
 				worse = worseSymbol
 			}
 
-			fmt.Printf("%2s %4d%% %s (%d/%d)\n",
+			fmt.Printf("%2s %4d%% %s (%d/%d %s)\n",
 				worse,
 				int(metric.Diff),
 				metric.Metric,
 				int(metric.CurrentValue),
-				int(metric.LatestValue))
+				int(metric.LatestValue),
+				metric.Measure)
 		}
 
 		fmt.Println()
