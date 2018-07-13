@@ -4,6 +4,15 @@ import (
 	"math"
 )
 
+const (
+	// MetricNsPerOpDisplay specifies name to display for NsPerOp metric
+	MetricNsPerOpDisplay string = "time"
+	// MetricAllocedBytesPerOpDisplay specifies name to display for AllocedBytesPerOp metric
+	MetricAllocedBytesPerOpDisplay string = "memory"
+	// MetricAllocsPerOpDisplay specifies name to display for AllocsPerOp metric
+	MetricAllocsPerOpDisplay string = "allocations"
+)
+
 // Compare two different benchmark results
 func Compare(latest *Result, current *Result, threshold uint) (bool, []Comparision) {
 	succeed := true
@@ -19,9 +28,9 @@ func Compare(latest *Result, current *Result, threshold uint) (bool, []Comparisi
 		cmp := Comparision{
 			Test: name,
 			Metrics: []MetricComparision{
-				calculate("NsPerOp", currentBench.NsPerOp, latestBench.NsPerOp, threshold),
-				calculate("AllocedBytesPerOp", float64(currentBench.AllocedBytesPerOp), float64(latestBench.AllocedBytesPerOp), threshold),
-				calculate("AllocsPerOp", float64(currentBench.AllocsPerOp), float64(latestBench.AllocsPerOp), threshold),
+				calculate(MetricNsPerOpDisplay, currentBench.NsPerOp, latestBench.NsPerOp, threshold),
+				calculate(MetricAllocedBytesPerOpDisplay, float64(currentBench.AllocedBytesPerOp), float64(latestBench.AllocedBytesPerOp), threshold),
+				calculate(MetricAllocsPerOpDisplay, float64(currentBench.AllocsPerOp), float64(latestBench.AllocsPerOp), threshold),
 			},
 		}
 
