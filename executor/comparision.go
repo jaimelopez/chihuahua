@@ -1,25 +1,22 @@
 package executor
 
+// These constants specifies the display name for some metrics
 const (
-	// MetricNsPerOpDisplay specifies name to display for NsPerOp metric
-	MetricNsPerOpDisplay string = "time"
-	// MetricAllocedBytesPerOpDisplay specifies name to display for AllocedBytesPerOp metric
-	MetricAllocedBytesPerOpDisplay string = "memory"
-	// MetricAllocsPerOpDisplay specifies name to display for AllocsPerOp metric
-	MetricAllocsPerOpDisplay string = "allocations"
+	MetricNsPerOpDisplay           string = "time"        // NsPerOp metric
+	MetricAllocedBytesPerOpDisplay string = "memory"      // AllocedBytesPerOp metric
+	MetricAllocsPerOpDisplay       string = "allocations" // AllocsPerOp metric
 )
 
+// Measures used in the metrics
 const (
-	// MetricNsPerOpMeasure specifies used measure in NsPerOp metric
-	MetricNsPerOpMeasure string = "ns"
-	// MetricAllocedBytesPerOpMeasure specifies used measure in AllocedBytesPerOp metric
-	MetricAllocedBytesPerOpMeasure string = "bytes"
-	// MetricAllocsPerOpMeasure specifies used measure in AllocsPerOp metric
-	MetricAllocsPerOpMeasure string = "times"
+	MetricNsPerOpMeasure           string = "ns"    // Nanoseconds per operation
+	MetricAllocedBytesPerOpMeasure string = "bytes" // Bytes allocated per operation
+	MetricAllocsPerOpMeasure       string = "times" // Allocation times per operation
 )
 
 // Comparision represents a whole comparision between two results
 type Comparision struct {
+	Name    string
 	Test    string
 	Metrics []MetricComparision
 }
