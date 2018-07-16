@@ -12,8 +12,8 @@ import (
 
 const (
 	nsPerOpertationIndexName   string = "ns"
-	allocationsNumberIndexName string = "mallocbytes"
-	allocatedBytesIndexName    string = "mallocs"
+	allocationsNumberIndexName string = "mallocs"
+	allocatedBytesIndexName    string = "mallocbytes"
 	timestampField             string = "@timestamp"
 )
 
