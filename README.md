@@ -39,6 +39,7 @@ Example:
 ```
 chihuahua -group myapp -storage file -destination /var/tmp/benchs -results -save 
 ```
+![](https://image.ibb.co/htsCYo/result.png)
 
 ## Elasticsearch storage
 Elastic structure is a bit hardcoded, having 3 different indexes one per metric with the following names:
