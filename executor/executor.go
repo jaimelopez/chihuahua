@@ -1,11 +1,14 @@
 package executor
 
 import (
+	"bufio"
 	"bytes"
 	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"strconv"
+	"strings"
 	"time"
 
 	"golang.org/x/tools/benchmark/parse"
@@ -43,7 +46,9 @@ func FromFile(file string) (*Result, error) {
 
 // Parse parse benchmarks results
 func Parse(output *bytes.Buffer) (*Result, error) {
-	set, err := parse.ParseSet(output)
+	buf := filter(output)
+
+	set, err := parse.ParseSet(buf)
 	if err != nil {
 		return nil, err
 	}
@@ -55,4 +60,30 @@ func Parse(output *bytes.Buffer) (*Result, error) {
 	}
 
 	return result, nil
+}
+
+func filter(output *bytes.Buffer) *bytes.Buffer {
+	buf := &bytes.Buffer{}
+	scan := bufio.NewScanner(output)
+
+	for scan.Scan() {
+		t := scan.Text()
+		fields := strings.Fields(t)
+
+		if strings.HasPrefix(fields[0], "Benchmark") {
+			_, _ = buf.WriteString("\n" + fields[0])
+		}
+
+		for idx, val := range fields {
+			if _, err := strconv.Atoi(val); err == nil {
+				_, _ = buf.WriteString(" " + val)
+
+				if strings.Contains(fields[idx+1], "/") {
+					_, _ = buf.WriteString(" " + fields[idx+1])
+				}
+			}
+		}
+	}
+
+	return buf
 }
