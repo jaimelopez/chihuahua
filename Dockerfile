@@ -1,4 +1,4 @@
-FROM golang:1.10-alpine
+FROM golang:1.12-alpine
 
 RUN apk -U add make git
 RUN go get -u github.com/jaimelopez/chihuahua

@@ -1,7 +1,7 @@
 .PHONY: build docker-build docker-push
 
-image 	:= "chihuahua"
-version := "latest"
+image 	?= "chihuahua"
+version ?= "latest"
 
 build:
 	go build -ldflags '-extldflags "-static"' -o chihuahua
