@@ -19,15 +19,15 @@ func Run(duration time.Duration, debug bool) (*Result, error) {
 	var output bytes.Buffer
 
 	cmd := exec.Command("go",
-		"test",                         // Execute tests
-		"-p 1",                         // Parallelization between different packages;
-		"-parallel 1",                  // Number of parallel test running for same package
-		"-count 1",                     // Avoids to cache results
-		"-cpu 2",                       // Number of cpus (using always 2 to avoid missing results)
-		"-bench .",                     // Run all benchs
-		"-run NONE",                    // Run only those tests and examples matching the regular expression
-		"-benchtime"+duration.String(), // Tests duration
-		"-benchmem",                    // Includes memmory into report
+		"test",    // Execute tests
+		"-p", "1", // Parallelization between different packages;
+		"-parallel", "1", // Number of parallel test running for same package
+		"-count", "1", // Avoids to cache results
+		"-cpu", "2", // Number of cpus (using always 2 to avoid missing results)
+		"-bench", ".", // Run all benchs
+		"-run", "NONE", // Run only those tests and examples matching the regular expression
+		"-benchtime", duration.String(), // Tests duration
+		"-benchmem", // Includes memmory into report
 		"./...")
 
 	cmd.Stdout = io.Writer(&output)
