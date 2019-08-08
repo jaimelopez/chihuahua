@@ -18,7 +18,7 @@ import (
 func Run(duration time.Duration, debug bool) (*Result, error) {
 	var output bytes.Buffer
 
-	cmd := exec.Command("go", "test", "-bench", ".", "-run", "NONE", "-benchtime", duration.String(), "-cpu", "2", "-benchmem", "./...")
+	cmd := exec.Command("go", "test -count 1 -bench . -run NONE -benchtime", duration.String(), "-cpu 2 -benchmem ./...")
 	cmd.Stdout = io.Writer(&output)
 	cmd.Stderr = io.Writer(os.Stderr)
 

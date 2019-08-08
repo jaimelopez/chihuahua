@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Params defines behaviour to run the app
+// Parameters defines behaviour to run the app
 type Parameters struct {
 	Group       *string
 	Driver      *string
