@@ -3,6 +3,7 @@ package executor
 import (
 	"bufio"
 	"bytes"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
@@ -39,7 +40,7 @@ func Run(duration time.Duration, debug bool) (*Result, error) {
 
 	err := cmd.Run()
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%s\n-\n%s", err, output.String())
 	}
 
 	return Parse(&output)
